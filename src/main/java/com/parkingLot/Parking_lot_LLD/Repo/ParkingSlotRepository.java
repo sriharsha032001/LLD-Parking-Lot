@@ -1,7 +1,6 @@
 package com.parkingLot.Parking_lot_LLD.Repo;
 
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -29,6 +28,6 @@ public interface ParkingSlotRepository extends JpaRepository<ParkingSlot, Long> 
 
         @Modifying
         @Query("UPDATE ParkingSlot p SET p.isOccupied = :occupied WHERE p.slotId = :slotId")
-        int updateOccupiedFlag(@Param("slotId") UUID slotId, @Param("occupied") boolean occupied);
+        int updateOccupiedFlag(@Param("slotId") long slotId, @Param("occupied") boolean occupied);
     
 }
