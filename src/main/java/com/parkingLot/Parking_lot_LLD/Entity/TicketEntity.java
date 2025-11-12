@@ -33,7 +33,7 @@ public class TicketEntity {
     private VehicleType vehicleType;
 
     @Column(name = "slot_id", nullable = false)
-    private long slotId;
+    private Long slotId;
     @Column(name = "entry_time", nullable = false)
     private Instant entryTime;
 

@@ -53,8 +53,6 @@ public class TicketService {
         ticketRepository.save(ticket);
 
         return ticket;
-
-        
     }
 
     @Transactional
@@ -77,7 +75,6 @@ public class TicketService {
         if (ticket.getSlotId() != null) {
             
             parkingSlotRepository.updateOccupiedFlag(ticket.getSlotId(), false);
-
             
         }
 
