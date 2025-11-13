@@ -1,10 +1,8 @@
 package com.parkingLot.Parking_lot_LLD.controller;
 
-import java.security.KeyStore.Entry;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,11 +51,11 @@ public class TicketController {
 
     public ResponseEntity<ExitResponse> closeTicket(@Valid @RequestBody ExitRequest exitRequest) {
 
-        TicketEntity ticket = tickerService.closeTicket(exitRequest.getTicketId(), 0);
+        TicketEntity ticket = ticketService.closeTicket(exitRequest.getTicketId(), 0);
 
-        ExitResponse response = ExitResponse.builder().build()
+        ExitResponse response = ExitResponse.builder()
                                 .ticketId(ticket.getTicketId())
-                                .currency(ticket.getPrice())
+                                .amountPaid(ticket.getPrice())
                                 .exitTime(ticket.getExitTime())
                                 .status("Closed")
                                 .build();
