@@ -8,7 +8,7 @@ import lombok.Data;
 public class EntryRequest {
     
         @NotBlank(message = "Vehicle number cannot be blank")
-        private String vehicleNumber;
+        private Long vehicleNumber;
 
         @NotBlank(message = "Vehicle type cannot be blank")
         private String vehicleType;

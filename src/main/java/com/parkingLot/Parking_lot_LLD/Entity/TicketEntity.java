@@ -15,8 +15,8 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "ticket")
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
