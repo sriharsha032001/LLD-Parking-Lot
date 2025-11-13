@@ -1,11 +1,10 @@
 package com.parkingLot.Parking_lot_LLD.service;
 
 import java.time.Instant;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.annotations.NotFound;
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.parkingLot.Parking_lot_LLD.Entity.ParkingSlot;
@@ -48,7 +47,7 @@ public class TicketService {
 
         // create a ticket 
 
-        TicketEntity ticket = TicketEntity.builder().ticketId(UUID.randomUUID()).vehicleNumber(vehicleNumber).vehicleType(vehicleType).entryTime(Instant.now()).paid(false).build();
+        TicketEntity ticket =   Objects.requireNonNull(TicketEntity.builder().ticketId(UUID.randomUUID()).vehicleNumber(vehicleNumber).vehicleType(vehicleType).entryTime(Instant.now()).paid(false).build());
 
         ticketRepository.save(ticket);
 
@@ -75,14 +74,31 @@ public class TicketService {
         if (ticket.getSlotId() != null) {
             
             parkingSlotRepository.updateOccupiedFlag(ticket.getSlotId(), false);
-            
+
+
         }
 
         return ticket;
 
     }
 
+    public static class NotFoundException extends RuntimeException {
+        public NotFoundException(String message) {
+            super(message);
+        }
+    }
 
+    public static class noAvailableSlotException extends RuntimeException {
+        public noAvailableSlotException(String message){
+            super(message);
+        }
+     }
+
+     public static class AlreadyParkedException extends RuntimeException {
+        public AlreadyParkedException(String message){
+            super(message);
+        }
+     }
 
         
 }
