@@ -43,10 +43,7 @@ public class TicketService {
         slot.setIsOccupied(true);
         parkingSlotRepository.save(slot);
 
-
-
-        // create a ticket 
-
+        // create a ticket for the vehicle
         TicketEntity ticket =   Objects.requireNonNull(TicketEntity.builder().ticketId(UUID.randomUUID()).vehicleNumber(vehicleNumber).vehicleType(vehicleType).entryTime(Instant.now()).paid(false).build());
 
         ticketRepository.save(ticket);
@@ -75,7 +72,6 @@ public class TicketService {
             
             parkingSlotRepository.updateOccupiedFlag(ticket.getSlotId(), false);
 
-
         }
 
         return ticket;
@@ -99,6 +95,29 @@ public class TicketService {
             super(message);
         }
      }
+        // create event for ticket created
+        public static class ticketCreatedEvent {
+            private final TicketEntity ticket;
 
-        
+            public ticketCreatedEvent(TicketEntity ticket) {
+                this.ticket = ticket;
+            }
+
+            public TicketEntity getTicket(){
+                return ticket;
+            }           
+     }
+
+     // create event for closed ticket
+     public static class closedTicketEvent { 
+        private final TicketEntity ticket;
+
+        public closedTicketEvent(TicketEntity ticket) {
+            this.ticket = ticket;
+        }
+
+        public TicketEntity getTicket() {
+            return ticket;
+        }
+     }
 }
